@@ -1,4 +1,77 @@
-// REF - 09-NodeJS.07-Ins_Functional-Loops
+/*
+    09-NodeJS.07-Ins_Functional-Loops
+    09-NodeJS.13-Ins_Read-Write-File
+    09-NodeJS.15-Ins_Modularization (Use to move test scripts to import.)
+    09-NodeJS.17-Ins_npm (Use to declare dependencies and write to file.)
+    09-NodeJS.19-Ins_Inquirer-Demo (Use to get input from user.)
+*/
+
+//  Import Dependencies
+/* 
+    In the README add instructions on running the following command line first
+        > npm init
+        > npm i inquirer
+        > node index.js
+*/
+
+    const fs = require('fs');
+    const npm = require('npm');
+    const inquirer = require('inquirer');
+
+    inquirer
+      .prompt([
+        {
+            type: 'input',
+            message: "What is the employee's first name?",
+            name: 'firstName',
+        },
+        {
+            type: 'input',
+            message: "What is the employee's job description?",
+            name: 'role',
+        },
+        {
+            type: 'input',
+            message: "What is the employer identification number?",
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: "What is the employee's email address?",
+            name: 'email',
+        },
+        {
+            type: 'input',
+            message: "What is the assigned office number?",
+            name: 'officeId',
+        },
+        {
+            type: 'input',
+            message: "What is the github handle?",
+            name: 'github',
+        },
+        {
+            type: 'input',
+            message: "What school does/did the employee attend?",
+            name: 'school',
+        },
+      ])
+      .then((response) =>
+        response.name != null
+          ? console.log('Success!')
+          : console.log('You must add a name.')
+      );
+
+// Accept User Input
+    fs.writeFile("package.json", process.argv[1], function(err){
+        if(err){
+            return console.log(err);
+        } console.log("Success! " + process.argv[1]);
+    });
+
+// TDD
+    // console.log(process.argv);
+    // console.log(process.argv[1]);
 
 /*
     GIVEN a command-line application that accepts user input
