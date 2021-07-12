@@ -6,18 +6,21 @@
     09-NodeJS.19-Ins_Inquirer-Demo (Use to get input from user.)
 */
 
-//  Import Dependencies
 /* 
     In the README add instructions on running the following command line first
-        > npm init
-        > npm i inquirer
-        > node index.js
+        > npm install                               (To install npm in order to install dependencies and run command line app correctly.)
+        > npm init                                  (To initialize package.json and create package-lock.json.)
+        > npm i inquirer                            (To accept user answers to questions.)
+        > node index.js                             (To run command line application.)
+        > rm -rf node_modules package-lock.json     (To remove npm installation if need to start over.)
 */
 
+    //  Import Dependencies
+    //const npm = require('npm');
     const fs = require('fs');
-    const npm = require('npm');
     const inquirer = require('inquirer');
 
+    // Accept User Input
     inquirer
       .prompt([
         {
@@ -56,18 +59,18 @@
             name: 'school',
         },
       ])
-      .then((response) =>
-        response.name != null
-          ? console.log('Success!')
-          : console.log('You must add a name.')
-      );
+      .then((response) => {
+        const filename = `${response.firstName.toLowerCase().split(' ').join('')}.json`;
 
-// Accept User Input
-    fs.writeFile("package.json", process.argv[1], function(err){
-        if(err){
-            return console.log(err);
-        } console.log("Success! " + process.argv[1]);
-    });
+        // Write package.json file
+        fs.writeFile(
+            filename, 
+            JSON.stringify(response, null, '\t'), 
+            (err) => err ? console.log(err) : console.log('Success!')
+        );
+      });
+
+
 
 // TDD
     // console.log(process.argv);
