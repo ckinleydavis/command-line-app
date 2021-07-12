@@ -1,84 +1,4 @@
 /*
-    09-NodeJS.07-Ins_Functional-Loops
-    09-NodeJS.13-Ins_Read-Write-File
-    09-NodeJS.15-Ins_Modularization (Use to move test scripts to import.)
-    09-NodeJS.17-Ins_npm (Use to declare dependencies and write to file.)
-    09-NodeJS.19-Ins_Inquirer-Demo (Use to get input from user.)
-*/
-
-/* 
-    In the README add instructions on running the following command line first
-        > npm install                               (To install npm in order to install dependencies and run command line app correctly.)
-        > npm init                                  (To initialize package.json and create package-lock.json.)
-        > npm i inquirer                            (To accept user answers to questions.)
-        > node index.js                             (To run command line application.)
-        > rm -rf node_modules package-lock.json     (To remove npm installation if need to start over.)
-*/
-
-    //  Import Dependencies
-    //const npm = require('npm');
-    const fs = require('fs');
-    const inquirer = require('inquirer');
-
-    // Accept User Input
-    inquirer
-      .prompt([
-        {
-            type: 'input',
-            message: "What is the employee's first name?",
-            name: 'firstName',
-        },
-        {
-            type: 'input',
-            message: "What is the employee's job description?",
-            name: 'role',
-        },
-        {
-            type: 'input',
-            message: "What is the employer identification number?",
-            name: 'id',
-        },
-        {
-            type: 'input',
-            message: "What is the employee's email address?",
-            name: 'email',
-        },
-        {
-            type: 'input',
-            message: "What is the assigned office number?",
-            name: 'officeId',
-        },
-        {
-            type: 'input',
-            message: "What is the github handle?",
-            name: 'github',
-        },
-        {
-            type: 'input',
-            message: "What school does/did the employee attend?",
-            name: 'school',
-        },
-      ])
-      .then((response) => {
-        const filename = `${response.firstName.toLowerCase().split(' ').join('')}.json`;
-
-        // Write package.json file
-        fs.writeFile(
-            filename, 
-            JSON.stringify(response, null, '\t'), 
-            (err) => err ? console.log(err) : console.log('Success!')
-        );
-      });
-
-
-
-// TDD
-    // console.log(process.argv);
-    // console.log(process.argv[1]);
-
-/*
-    GIVEN a command-line application that accepts user input
-    WHEN I am prompted for my team members and their information
     THEN an HTML file is generated that displays a nicely formatted team roster based on user input
     WHEN I click on an email address in the HTML
     THEN my default email program opens and populates the TO field of the email with the address
@@ -96,36 +16,127 @@
     THEN I exit the application, and the HTML is generated
 */
 
-// Employees Array and its Properties
-var employees = [
+/* 
+    In the README add instructions on running the following command line first
+        > npm install                               (To install npm in order to install dependencies and run command line app correctly.)
+        > npm init                                  (To initialize package.json and create package-lock.json.)
+        > npm i inquirer                            (To accept user answers to questions.)
+        > node index.js                             (To run command line application.)
+        > rm -rf node_modules package-lock.json     (To remove npm installation if need to start over.)
+*/
+
+/*  REFERENCES
+    09-NodeJS.07-Ins_Functional-Loops
+    09-NodeJS.13-Ins_Read-Write-File
+    09-NodeJS.15-Ins_Modularization (Use to move test scripts to import.)
+    09-NodeJS.17-Ins_npm (Use to declare dependencies and write to file.)
+    09-NodeJS.19-Ins_Inquirer-Demo (Use to get input from user.)
+*/
+
+// Import Dependencies
+const fs = require('fs');
+const inquirer = require('inquirer');
+
+/*  Import Dependencies (Testing)
+
+    // TDD1
+    console.log(process.argv);
+
+    // TDD2
+    console.log(process.argv[1]);
+*/
+
+// Accept User Input
+inquirer
+    .prompt([
     {
-        firstName: "Carla",
-        role: "Developer",
-        id: 2,
-        email: "ckinleydavis@gmail.com",
-        officeId: 1,
-        github: "ckinleydavis",
-        school: "The Ohio State University",
-        // Function to Bind 'this' to the Employee Object and its Properties
-        sayHello: function() {
-            console.log("Hello " + this.firstName + "!");
-        }
+        type: 'input',
+        message: "What is the employee's first name?",
+        name: 'firstName',
     },
     {
-        firstName: "Jerry",
-        role: "Manager",
-        id: 1,
-        email: "jkinley20@gmail.com",
-        officeId: 1,
-        github: "jkinley",
-        // Function to Bind 'this' to the Employee Object and its Properties
-        sayHello: function() {
-            console.log("Hello " + this.firstName + "!");
+        type: 'input',
+        message: "What is the employee's job description?",
+        name: 'role',
+    },
+    {
+        type: 'input',
+        message: "What is the employer identification number?",
+        name: 'id',
+    },
+    {
+        type: 'input',
+        message: "What is the employee's email address?",
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: "What is the assigned office number?",
+        name: 'officeId',
+    },
+    {
+        type: 'input',
+        message: "What is the github handle?",
+        name: 'github',
+    },
+    {
+        type: 'input',
+        message: "What school does/did the employee attend?",
+        name: 'school',
+    },
+    ])
+    .then((response) => {
+    const filename = `${response.firstName.toLowerCase().split(' ').join('')}.json`;
+
+    // Write package.json file
+    fs.writeFile(
+        filename, 
+        JSON.stringify(response, null, '\t'), 
+        (err) => err ? console.log(err) : console.log('Success!')
+    );
+    });
+
+/*  Accept User Input (Testing)
+
+    // TDD1
+*/
+
+////////////////////////////////////////////////////////////////////
+// CODE TO IGNORE - USED DURING BEGINNING OF DEV PROCESS
+////////////////////////////////////////////////////////////////////
+
+// Employees Array and its Properties
+/*
+    var employees = [
+        {
+            firstName: "Carla",
+            role: "Developer",
+            id: 2,
+            email: "ckinleydavis@gmail.com",
+            officeId: 1,
+            github: "ckinleydavis",
+            school: "The Ohio State University",
+            // Function to Bind 'this' to the Employee Object and its Properties
+            sayHello: function() {
+                console.log("Hello " + this.firstName + "!");
+            }
+        },
+        {
+            firstName: "Jerry",
+            role: "Manager",
+            id: 1,
+            email: "jkinley20@gmail.com",
+            officeId: 1,
+            github: "jkinley",
+            // Function to Bind 'this' to the Employee Object and its Properties
+            sayHello: function() {
+                console.log("Hello " + this.firstName + "!");
+            }
         }
-    }
-];
+    ];
+*/
  
-/*  Employees Array and its Properties
+/*  Employees Array and its Properties (Testing)
 
     // TDD1
     console.log(employees);
@@ -141,6 +152,8 @@ var employees = [
     ); console.log(emailAddress);
 */
 
+////////////////////////////////////////////////////////////////////
+// CODE TO IGNORE - USED DURING BEGINNING OF DEV PROCESS
 ////////////////////////////////////////////////////////////////////
 
 /*  Employee Object and its Properties
