@@ -1,4 +1,4 @@
-/*
+/*  REMAINING TODO
     THEN an HTML file is generated that displays a nicely formatted team roster based on user input
     WHEN I click on an email address in the HTML
     THEN my default email program opens and populates the TO field of the email with the address
@@ -16,8 +16,7 @@
     THEN I exit the application, and the HTML is generated
 */
 
-/* 
-    In the README add instructions on running the following command line first
+/*  In the README add instructions on running the following command line first
         > npm install                               (To install npm in order to install dependencies and run command line app correctly.)
         > npm init                                  (To initialize package.json and create package-lock.json.)
         > npm i inquirer                            (To accept user answers to questions.)
@@ -31,20 +30,17 @@
     09-NodeJS.15-Ins_Modularization (Use to move test scripts to import.)
     09-NodeJS.17-Ins_npm (Use to declare dependencies and write to file.)
     09-NodeJS.19-Ins_Inquirer-Demo (Use to get input from user.)
+    10-OOP.11-Ins-TDD (Use to create TDD Mod [i.e. index.test.js])
+    10-OOP.15-Ins_Organizing-Tests
 */
 
 // Import Dependencies
+
 const fs = require('fs');
+//console.log(process.argv);
+//console.log(process.argv[1]);
+
 const inquirer = require('inquirer');
-
-/*  Import Dependencies (Testing)
-
-    // TDD1
-    console.log(process.argv);
-
-    // TDD2
-    console.log(process.argv[1]);
-*/
 
 // Accept User Input
 inquirer
@@ -55,9 +51,10 @@ inquirer
         name: 'firstName',
     },
     {
-        type: 'input',
+        type: 'list',
         message: "What is the employee's job description?",
         name: 'role',
+        choices: ['Manager', 'Developer', 'Sales'],
     },
     {
         type: 'input',
@@ -70,9 +67,10 @@ inquirer
         name: 'email',
     },
     {
-        type: 'input',
+        type: 'checkbox',
         message: "What is the assigned office number?",
         name: 'officeId',
+        choices: ['001', '003', '007', '010'],
     },
     {
         type: 'input',
@@ -85,7 +83,7 @@ inquirer
         name: 'school',
     },
     ])
-    .then((response) => {
+    .then((response) => { // TODO: Research how to add all employee info to one json file rather than multiple
     const filename = `${response.firstName.toLowerCase().split(' ').join('')}.json`;
 
     // Write package.json file
@@ -99,6 +97,7 @@ inquirer
 /*  Accept User Input (Testing)
 
     // TDD1
+
 */
 
 ////////////////////////////////////////////////////////////////////
